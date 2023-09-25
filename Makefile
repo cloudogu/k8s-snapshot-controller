@@ -27,7 +27,7 @@ snapshot-controller-release: ## Interactively starts the release workflow.
 .PHONY: helm-snapshot-controller-apply
 helm-snapshot-controller-apply: ${BINARY_HELM} helm-generate $(K8S_POST_GENERATE_TARGETS) ## Generates and installs the helm chart.
 	@echo "Apply generated helm chart"
-	@${BINARY_HELM} upgrade -i ${ARTIFACT_ID} ${K8S_HELM_TARGET}
+	@${BINARY_HELM} upgrade -i ${ARTIFACT_ID} ${K8S_HELM_TARGET} --namespace ${NAMESPACE}
 
 .PHONY: helm-snapshot-controller-reinstall
 helm-snapshot-controller-reinstall: helm-delete helm-snapshot-controller-apply ## Uninstalls the current helm chart and reinstalls it.
