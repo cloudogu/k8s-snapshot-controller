@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v5.0.1-2] - 2023-10-02
+## Fixed
+- Fixed automatic release in Jenkinsfile.
+
 ## [v5.0.1-1] - 2023-10-02
 ### Added
 - [#1] Add initial version of the snapshot-controller component.
