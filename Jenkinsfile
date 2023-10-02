@@ -25,14 +25,14 @@ node('docker') {
 
                 kubevalImage = "cytopia/kubeval:0.15"
 
-//                stage("Lint k8s Resources") { TODO
-//                    new Docker(this)
-//                            .image(kubevalImage)
-//                            .inside("-v ${WORKSPACE}/etcd/manifests/:/data -t --entrypoint=")
-//                                    {
-//                                        sh "kubeval manifests/etcd.yaml --ignore-missing-schemas"
-//                                    }
-//                }
+                stage("Lint k8s Resources") { TODO
+                    new Docker(this)
+                            .image(kubevalImage)
+                            .inside("-v ${WORKSPACE}/k8s/helm/:/data -t --entrypoint=")
+                                    {
+                                        sh "kubeval -d /data/templates --ignore-missing-schemas"
+                                    }
+                }
 
                 stage('Set up k3d cluster') {
                     k3d.startK3d()
@@ -41,17 +41,12 @@ node('docker') {
                     k3d.installKubectl()
                 }
 
-                stage('Test velero') { // TODO
-//                    k3d.kubectl("apply -f manifests/etcd.yaml")
-//                    // Sleep because it takes time for the controller to create the resource. Without it would end up
-//                    // in error "no matching resource found when run the wait command"
-//                    sleep(20)
-//                    k3d.kubectl("wait --for=condition=ready pod -l statefulset.kubernetes.io/pod-name=etcd-0 --timeout=300s")
-//                    k3d.kubectl("run etcd-client --restart='Never' --image docker.io/bitnami/etcd:3.5.2-debian-10-r0 --env ETCDCTL_API=2 --env ETCDCTL_ENDPOINTS=\"http://etcd.default.svc.cluster.local:4001\" --command -- sleep infinity")
-//                    sleep(20)
-//                    k3d.kubectl("wait --for=condition=ready pod -l run=etcd-client --timeout=300s")
-//                    k3d.kubectl("exec -it etcd-client -- etcdctl set key value")
-//                    k3d.kubectl("exec -it etcd-client -- etcdctl get key")
+                stage('Test snapshot-controller') {
+                    sh "NAMESPACE=default KUBECONFIG=${WORKSPACE}/.k3d/.kube/config make helm-snapshot-controller-apply"
+                    // Sleep because it takes time for the controller to create the resource. Without it would end up
+                    // in error "no matching resource found when run the wait command"
+                    sleep(20)
+                    k3d.kubectl("wait --for=condition=ready deploy -l app=snapshot-controller --timeout=300s")
                 }
             }
         }
