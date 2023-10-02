@@ -40,6 +40,9 @@ node('docker') {
                 stage('Install kubectl') {
                     k3d.installKubectl()
                 }
+                stage ('Install golang') {
+                    sh "sudo snap install go --classic"
+                }
 
                 stage('Test snapshot-controller') {
                     sh "NAMESPACE=default KUBECONFIG=${WORKSPACE}/.k3d/.kube/config make helm-snapshot-controller-apply"
