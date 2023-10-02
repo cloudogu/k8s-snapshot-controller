@@ -45,7 +45,7 @@ node('docker') {
                 }
 
                 stage('Test snapshot-controller') {
-                    sh "NAMESPACE=default KUBECONFIG=${WORKSPACE}/.k3d/.kube/config make helm-snapshot-controller-apply"
+                    sh "NAMESPACE=default KUBECONFIG=${WORKSPACE}/k3d/.k3d/.kube/config make helm-snapshot-controller-apply"
                     // Sleep because it takes time for the controller to create the resource. Without it would end up
                     // in error "no matching resource found when run the wait command"
                     sleep(20)
