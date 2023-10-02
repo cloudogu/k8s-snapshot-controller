@@ -25,7 +25,7 @@ node('docker') {
 
                 kubevalImage = "cytopia/kubeval:0.15"
 
-                stage("Lint k8s Resources") { TODO
+                stage("Lint k8s Resources") {
                     new Docker(this)
                             .image(kubevalImage)
                             .inside("-v ${WORKSPACE}/k8s/helm/:/data -t --entrypoint=")
