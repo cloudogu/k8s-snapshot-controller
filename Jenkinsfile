@@ -9,7 +9,7 @@ gitflow = new GitFlow(this, git)
 github = new GitHub(this, git)
 changelog = new Changelog(this)
 
-repositoryName = "k8s-velero"
+repositoryName = "k8s-snapshot-controller"
 productionReleaseBranch = "main"
 
 node('docker') {
@@ -76,13 +76,6 @@ void stageAutomaticRelease() {
 
         stage('Generate release resource') {
             make 'generate-release-resource'
-        }
-
-        stage('Push to Registry') {
-            GString targetEtcdResourceYaml = "target/make/${registryNamespace}/${repositoryName}_${releaseVersion}.yaml"
-
-            DoguRegistry registry = new DoguRegistry(this)
-            registry.pushK8sYaml(targetEtcdResourceYaml, repositoryName, registryNamespace, "${releaseVersion}")
         }
 
         stage('Push Helm chart to Harbor') {
