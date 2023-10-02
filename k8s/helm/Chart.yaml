@@ -1,6 +1,6 @@
 apiVersion: v2
 name: k8s-snapshot-controller
-description: A Helm chart for Kubernetes
+description: The snapshot-controller is a cluster-wide component responsible for creating and deleting a snapshot in the storage system through a CSI volume driver.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
