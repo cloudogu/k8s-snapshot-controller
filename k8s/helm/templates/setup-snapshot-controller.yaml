@@ -10,6 +10,8 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: snapshot-controller
+  labels:
+    app: snapshot-controller
 spec:
   replicas: 2
   selector:

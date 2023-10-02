@@ -9,11 +9,15 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: snapshot-controller
+  labels:
+    app: snapshot-controller
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: snapshot-controller-runner
+  labels:
+    app: snapshot-controller
 rules:
   - apiGroups: [""]
     resources: ["persistentvolumes"]
@@ -51,6 +55,8 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: snapshot-controller-role
+  labels:
+    app: snapshot-controller
 subjects:
   - kind: ServiceAccount
     name: snapshot-controller
@@ -65,6 +71,8 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: snapshot-controller-leaderelection
+  labels:
+    app: snapshot-controller
 rules:
 - apiGroups: ["coordination.k8s.io"]
   resources: ["leases"]
@@ -75,6 +83,8 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: snapshot-controller-leaderelection
+  labels:
+    app: snapshot-controller
 subjects:
   - kind: ServiceAccount
     name: snapshot-controller
