@@ -23,14 +23,13 @@ node('docker') {
                     make 'clean'
                 }
 
-                kubevalImage = "cytopia/kubeval:0.15"
-
+                helmImage = "alpine/helm:3.13.0"
                 stage("Lint k8s Resources") {
                     new Docker(this)
-                            .image(kubevalImage)
-                            .inside("-v ${WORKSPACE}/k8s/helm/:/data -t --entrypoint=")
+                            .image(helmImage)
+                            .inside("-v ${WORKSPACE}/:/data -t --entrypoint=")
                                     {
-                                        sh "kubeval -d /data/templates --ignore-missing-schemas"
+                                        sh "helm lint /data/k8s/helm"
                                     }
                 }
 
