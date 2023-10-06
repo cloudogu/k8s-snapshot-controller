@@ -10,6 +10,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: snapshot-controller
+  namespace: {{ .Release.Namespace }}
   labels:
     app: snapshot-controller
 spec:
@@ -31,7 +32,7 @@ spec:
       labels:
         app: snapshot-controller
     spec:
-      serviceAccount: snapshot-controller
+      serviceAccountName: snapshot-controller
       containers:
         - name: snapshot-controller
           image: gcr.io/k8s-staging-sig-storage/snapshot-controller:v5.0.0
