@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v5.0.1-3] - 2023-10-06
+## Fixed
+- [#3] Use correct namespace from helm release.
+
 ## [v5.0.1-2] - 2023-10-02
 ## Fixed
 - Fixed automatic release in Jenkinsfile.

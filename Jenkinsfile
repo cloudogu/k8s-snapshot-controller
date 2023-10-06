@@ -23,14 +23,13 @@ node('docker') {
                     make 'clean'
                 }
 
-                kubevalImage = "cytopia/kubeval:0.15"
-
+                helmImage = "alpine/helm:3.13.0"
                 stage("Lint k8s Resources") {
                     new Docker(this)
-                            .image(kubevalImage)
-                            .inside("-v ${WORKSPACE}/k8s/helm/:/data -t --entrypoint=")
+                            .image(helmImage)
+                            .inside("-v ${WORKSPACE}/:/data -t --entrypoint=")
                                     {
-                                        sh "kubeval -d /data/templates --ignore-missing-schemas"
+                                        sh "helm lint /data/k8s/helm"
                                     }
                 }
 
@@ -45,7 +44,7 @@ node('docker') {
                 }
 
                 stage('Test snapshot-controller') {
-                    sh "NAMESPACE=default KUBECONFIG=${WORKSPACE}/k3d/.k3d/.kube/config make helm-snapshot-controller-apply"
+                    sh "NAMESPACE=default KUBECONFIG=${WORKSPACE}/k3d/.k3d/.kube/config make helm-apply"
                     // Sleep because it takes time for the controller to create the resource. Without it would end up
                     // in error "no matching resource found when run the wait command"
                     sleep(20)
