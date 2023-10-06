@@ -9,7 +9,7 @@ include build/make/clean.mk
 include build/make/self-update.mk
 
 ##@ Release
-
+PRE_APPLY_TARGETS=
 K8S_PRE_GENERATE_TARGETS=generate-release-resource
 include build/make/k8s-component.mk
 
