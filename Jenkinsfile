@@ -84,10 +84,12 @@ void stageAutomaticRelease() {
                     .inside("--volume ${WORKSPACE}:/${repositoryName} -w /${repositoryName}")
                             {
                                 make 'helm-package-release'
+                                make 'crd-helm-package'
 
                                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'harborhelmchartpush', usernameVariable: 'HARBOR_USERNAME', passwordVariable: 'HARBOR_PASSWORD']]) {
                                     sh ".bin/helm registry login ${registryUrl} --username '${HARBOR_USERNAME}' --password '${HARBOR_PASSWORD}'"
                                     sh ".bin/helm push target/make/k8s/helm/${repositoryName}-${releaseVersion}.tgz oci://${registryUrl}/${registryNamespace}"
+                                    sh ".bin/helm push target/make/k8s/helm-crd/${repositoryName}-crd-${releaseVersion}.tgz oci://${registryUrl}/${registryNamespace}/"
                                 }
                             }
         }

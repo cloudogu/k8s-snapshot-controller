@@ -12,7 +12,7 @@ metadata:
   name: snapshot-controller
   namespace: {{ .Release.Namespace }}
   labels:
-    app: snapshot-controller
+    {{- include "k8s-snapshot-controller.labels" . | nindent 4 }}
 spec:
   replicas: 2
   selector:
