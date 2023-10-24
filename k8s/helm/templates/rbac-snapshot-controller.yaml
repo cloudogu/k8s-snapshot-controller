@@ -11,14 +11,14 @@ metadata:
   name: snapshot-controller
   namespace: {{ .Release.Namespace }}
   labels:
-    app: snapshot-controller
+    {{- include "k8s-snapshot-controller.labels" . | nindent 4 }}
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: snapshot-controller-runner
   labels:
-    app: snapshot-controller
+    {{- include "k8s-snapshot-controller.labels" . | nindent 4 }}
 rules:
   - apiGroups: [""]
     resources: ["persistentvolumes"]
@@ -57,7 +57,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: snapshot-controller-role
   labels:
-    app: snapshot-controller
+    {{- include "k8s-snapshot-controller.labels" . | nindent 4 }}
 subjects:
   - kind: ServiceAccount
     name: snapshot-controller
@@ -74,7 +74,7 @@ metadata:
   name: snapshot-controller-leaderelection
   namespace: '{{ .Release.Namespace }}'
   labels:
-    app: snapshot-controller
+    {{- include "k8s-snapshot-controller.labels" . | nindent 4 }}
 rules:
 - apiGroups: ["coordination.k8s.io"]
   resources: ["leases"]
@@ -87,7 +87,7 @@ metadata:
   name: snapshot-controller-leaderelection
   namespace: '{{ .Release.Namespace }}'
   labels:
-    app: snapshot-controller
+    {{- include "k8s-snapshot-controller.labels" . | nindent 4 }}
 subjects:
   - kind: ServiceAccount
     name: snapshot-controller
