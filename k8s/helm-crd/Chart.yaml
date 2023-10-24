@@ -1,5 +1,5 @@
 apiVersion: v2
-name: k8s-snapshot-controller
+name: k8s-snapshot-controller-crd
 description: The snapshot-controller is a cluster-wide component responsible for creating and deleting a snapshot in the storage system through a CSI volume driver.
 
 # A chart can be either an 'application' or a 'library' chart.
@@ -22,7 +22,3 @@ version: 0.0.0-replaceme
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "0.0.0-replaceme"
-
-annotations:
-  "k8s.cloudogu.com/ces-dependency/k8s-snapshot-controller-crd": "5.x.x-0"
-
