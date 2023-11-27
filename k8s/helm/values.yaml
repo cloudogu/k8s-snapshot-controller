@@ -1,0 +1,2 @@
+# Image of the snapshot controller.
+snapshot_controller_image: gcr.io/k8s-staging-sig-storage/snapshot-controller:v5.0.0
