@@ -31,7 +31,7 @@ node('docker') {
                 new Docker(this)
                         .image("golang:${goVersion}")
                         .mountJenkinsUser()
-                        .inside("--volume ${WORKSPACE}:/go/src/${project} -w /go/src/${project}")
+                        .inside("--volume ${WORKSPACE}:/${repositoryName} -w /${repositoryName}")
                                 {
                                     stage('Generate k8s Resources') {
                                         make 'crd-helm-generate'
