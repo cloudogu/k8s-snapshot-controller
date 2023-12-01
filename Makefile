@@ -1,6 +1,6 @@
 ARTIFACT_ID=k8s-snapshot-controller
 VERSION=5.0.1-4
-MAKEFILES_VERSION=9.0.0
+MAKEFILES_VERSION=9.0.1
 REGISTRY_NAMESPACE?=k8s
 HELM_REPO_ENDPOINT=k3ces.local:30099
 
@@ -11,7 +11,6 @@ include build/make/self-update.mk
 ##@ Release
 
 CRD_HELM_MANIFEST_TARGET=
-IMAGE_IMPORT_TARGET=
 include build/make/k8s-component.mk
 include build/make/k8s-crd.mk
 
