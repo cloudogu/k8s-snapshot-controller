@@ -18,8 +18,6 @@ helmCRDChartDir = "${helmTargetDir}/helm-crd"
 goVersion = "1.21"
 
 node('docker') {
-    K3d k3d = new K3d(this, "${WORKSPACE}", "${WORKSPACE}/k3d", env.PATH)
-
     timestamps {
         catchError {
             timeout(activity: false, time: 60, unit: 'MINUTES') {
@@ -45,26 +43,30 @@ node('docker') {
                                     }
                                 }
 
-                stage('Set up k3d cluster') {
-                    k3d.startK3d()
-                }
+                K3d k3d = new K3d(this, "${WORKSPACE}", "${WORKSPACE}/k3d", env.PATH)
 
-                stage('Deploy snapshot-controller') {
-                    k3d.helm("install ${repositoryName}-crd ${helmCRDChartDir}")
-                    k3d.helm("install ${repositoryName} ${helmChartDir}")
-                }
+                try {
+                    stage('Set up k3d cluster') {
+                        k3d.startK3d()
+                    }
 
-                stage('Test snapshot-controller') {
-                    // Sleep because it takes time for the controller to create the resource. Without it would end up
-                    // in error "no matching resource found when run the wait command"
-                    sleep(5)
-                    k3d.kubectl("wait --for=condition=ready pod -l app=snapshot-controller --timeout=300s")
+                    stage('Deploy snapshot-controller') {
+                        k3d.helm("install ${repositoryName}-crd ${helmCRDChartDir}")
+                        k3d.helm("install ${repositoryName} ${helmChartDir}")
+                    }
+
+                    stage('Test snapshot-controller') {
+                        // Sleep because it takes time for the controller to create the resource. Without it would end up
+                        // in error "no matching resource found when run the wait command"
+                        sleep(5)
+                        k3d.kubectl("wait --for=condition=ready pod -l app=snapshot-controller --timeout=300s")
+                    }
+                } finally {
+                    stage('Remove k3d cluster') {
+                        k3d.deleteK3d()
+                    }
                 }
             }
-        }
-
-        stage('Remove k3d cluster') {
-            k3d.deleteK3d()
         }
 
         stageAutomaticRelease()
