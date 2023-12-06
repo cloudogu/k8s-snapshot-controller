@@ -1,0 +1,2 @@
+# Image of the snapshot controller.
+snapshot_controller_image: registry.k8s.io/sig-storage/snapshot-controller:v5.0.1
