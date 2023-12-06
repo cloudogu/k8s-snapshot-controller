@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v5.0.1-5] - 2023-12-06
 ### Added
 - [#7] Added component patch template file for mirroring this chart in offline environments.
 
