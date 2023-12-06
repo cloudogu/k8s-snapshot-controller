@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v5.0.1-5] - 2023-12-06
+### Added
+- [#7] Added component patch template file for mirroring this chart in offline environments.
+
+### Changed
+- [#7] Update makefiles and just use only the chart as yaml resources.
+
 ## [v5.0.1-4] - 2023-10-24
 ### Changed
 - [#4] Add labels `app=ces` and `k8s.cloudogu.com/part-of=backup`.
