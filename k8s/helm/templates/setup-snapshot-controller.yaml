@@ -32,6 +32,10 @@ spec:
       labels:
         app: snapshot-controller
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       serviceAccountName: snapshot-controller
       containers:
         - name: snapshot-controller
