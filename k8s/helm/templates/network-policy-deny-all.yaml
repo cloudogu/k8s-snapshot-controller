@@ -1,0 +1,14 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: snapshot-controller-deny-ingress
+  namespace: {{ .Release.Namespace }}
+  labels:
+      {{- include "k8s-snapshot-controller.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    - matchLabels:
+        app: snapshot-controller
+  policyTypes:
+    - Ingress
