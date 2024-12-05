@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v5.0.1-8] - 2024-12-05
+### Added
+- [#13] Add networkPolicy to deny all ingress traffic
+
 ## [v5.0.1-7] - 2024-10-28
 ## Changed
 - [#11] Use `ces-container-registries` secret for pulling container images as default.
