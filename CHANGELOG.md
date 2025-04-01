@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v6.2.1-1] - 2025-04-01
+### Changed
+- [#15] Update snapshot-controller to 6.2.1
+
 ## [v5.0.1-8] - 2024-12-05
 ### Added
 - [#13] Add networkPolicy to deny all ingress traffic
