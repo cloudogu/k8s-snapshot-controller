@@ -61,6 +61,9 @@ node('docker') {
                         sleep(5)
                         k3d.kubectl("wait --for=condition=ready pod -l app=snapshot-controller --timeout=300s")
                     }
+                } catch(Exception e) {
+                    k3d.collectAndArchiveLogs()
+                    throw e as java.lang.Throwable
                 } finally {
                     stage('Remove k3d cluster') {
                         k3d.deleteK3d()
