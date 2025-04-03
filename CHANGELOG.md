@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v7.0.2-1] - 2025-04-03
+### Changed
+- [#17] Update snapshot-controller to 7.0.2
+
 ## [v6.2.1-1] - 2025-04-01
 ### Changed
 - [#15] Update snapshot-controller to 6.2.1
