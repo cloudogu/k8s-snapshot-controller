@@ -5,8 +5,8 @@ metadata:
   labels:
     {{- include "k8s-snapshot-controller-crd.labels" . | nindent 4 }}
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
-    api-approved.kubernetes.io: "https://github.com/kubernetes-csi/external-snapshotter/pull/665"
+    api-approved.kubernetes.io: "https://github.com/kubernetes-csi/external-snapshotter/pull/955"
+    controller-gen.kubebuilder.io/version: v0.12.0
   creationTimestamp: null
   name: volumesnapshotcontents.snapshot.storage.k8s.io
 spec:
@@ -73,6 +73,8 @@ spec:
               object represents. Servers may infer this from the endpoint the client
               submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
               type: string
+            metadata:
+              type: object
             spec:
               description: spec defines properties of a VolumeSnapshotContent created
                 by the underlying storage system. Required.
@@ -174,6 +176,7 @@ spec:
                       description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
                       type: string
                   type: object
+                  x-kubernetes-map-type: atomic
               required:
                 - deletionPolicy
                 - driver
@@ -240,6 +243,10 @@ spec:
                     on the underlying storage system. If not specified, it indicates
                     that dynamic snapshot creation has either failed or it is still
                     in progress.
+                  type: string
+                volumeGroupSnapshotHandle:
+                  description: VolumeGroupSnapshotHandle is the CSI "group_snapshot_id"
+                    of a group snapshot on the underlying storage system.
                   type: string
               type: object
           required:
