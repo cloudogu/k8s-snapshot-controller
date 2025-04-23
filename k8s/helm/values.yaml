@@ -3,6 +3,13 @@ global:
     - name: "ces-container-registries"
   networkPolicies:
     enabled: true
+
+manager:
+  resources:
+    requests:
+      cpu: 15m
+      memory: 105M
+    limits:
+      memory: 105M
 # Image of the snapshot controller.
 snapshot_controller_image: registry.k8s.io/sig-storage/snapshot-controller:v6.3.4
-
