@@ -12,4 +12,4 @@ manager:
     limits:
       memory: 105M
 # Image of the snapshot controller.
-snapshot_controller_image: registry.k8s.io/sig-storage/snapshot-controller:v6.3.4
+snapshot_controller_image: registry.k8s.io/sig-storage/snapshot-controller:v8.2.1
