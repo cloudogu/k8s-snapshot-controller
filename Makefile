@@ -13,8 +13,9 @@ include build/make/self-update.mk
 CRD_HELM_MANIFEST_TARGET=
 include build/make/k8s-component.mk
 include build/make/k8s-crd.mk
+include build/make/k8s.mk
 
 .PHONY: snapshot-controller-release
-snapshot-controller-release: ## Interactively starts the release workflow.
+snapshot-controller-release: ${BINARY_YQ} ## Interactively starts the release workflow.
 	@echo "Starting git flow release..."
 	@build/make/release.sh snapshot-controller
