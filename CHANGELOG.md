@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v8.2.1-2] - 2025-07-01
+### Fixes
+- [#23] Update old CRD-dependency
+
 ## [v8.2.1-1] - 2025-06-05
 ### Changed
 - [#21] Update snapshot-controller to 8.2.1
