@@ -40,9 +40,9 @@ spec:
       serviceAccountName: snapshot-controller
       containers:
         - name: snapshot-controller
-          image: {{ .Values.snapshot_controller_image }}
+          image: {{ .Values.snapshot_controller_image}}
           args:
-            - "--v=5"
+            - "--v={{ .Values.global.logLevel | default 5 }}"
             - "--leader-election=true"
             # Add a marker to the snapshot-controller manifests. This is needed to enable feature gates in CSI prow jobs.
             # For example, in https://github.com/kubernetes-csi/csi-release-tools/pull/209, the snapshot-controller YAML is updated to add --prevent-volume-mode-conversion=true so that the feature can be enabled for certain e2e tests.

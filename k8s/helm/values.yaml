@@ -3,6 +3,7 @@ global:
     - name: "ces-container-registries"
   networkPolicies:
     enabled: true
+  logLevel: 5
 
 manager:
   resources:
