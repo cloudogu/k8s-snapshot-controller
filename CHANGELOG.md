@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v8.2.1-3] - 2025-07-17
+### Changed
+- [#25] Update Makefiles to 10.2.0
+### Added
+- [#25] add metadata mapping for logLevel
+
 ## [v8.2.1-2] - 2025-07-01
 ### Fixes
 - [#23] Update old CRD-dependency
