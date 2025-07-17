@@ -3,9 +3,9 @@ global:
     - name: "ces-container-registries"
   networkPolicies:
     enabled: true
-  logLevel: 5
 
 manager:
+  logLevel: 5
   resources:
     requests:
       cpu: 15m

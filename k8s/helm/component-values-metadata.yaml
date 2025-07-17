@@ -5,7 +5,7 @@ metavalues:
     name: Log-Level
     description: The central configuration value to set the log level for this component
     keys:
-      - path: global.logLevel
+      - path: manager.logLevel
         mapping:
           debug: 5
           info: 2
