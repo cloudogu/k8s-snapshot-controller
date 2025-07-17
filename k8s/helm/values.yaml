@@ -5,6 +5,7 @@ global:
     enabled: true
 
 manager:
+  logLevel: 5
   resources:
     requests:
       cpu: 15m
